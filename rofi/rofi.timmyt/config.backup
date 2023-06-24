@@ -1,0 +1,6 @@
+configuration {
+	// list-keybindings: true;
+	modes: "combi";
+	combi-modes: [window,drun];
+	show-icons: true;
+}
