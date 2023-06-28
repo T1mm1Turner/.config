@@ -8,6 +8,8 @@ I use [Arch](https://archlinux.org "OS") as OS.
 
 [Lightdm](https://github.com/canonical/lightdm "Display manager") for display management.
 
+[Nitrogen](https://github.com/l3ib/nitrogen "Wallpaper setter") to search and set desktop background wallpapers.
+
 And a little more, there are some dependencies, like:
 
 ## Fonts ##
