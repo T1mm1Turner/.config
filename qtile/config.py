@@ -73,7 +73,7 @@ keys = [
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    # Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     # Custom keys
     Key([mod], "u", lazy.group["Home"].toscreen(), desc="Switch group Home to active screen"),
     Key([mod, "shift"], "u", lazy.window.togroup("Home", switch_group=True), desc="Switch window & screen to group Home"), 
@@ -262,7 +262,7 @@ primaryBar = bar.Bar(
                 ),
                 ### Mid
                 widget.Spacer(),
-                # widget.Prompt(),
+                widget.Prompt(),
                 widget.WindowName(),
                 widget.Spacer(),
                 ### Right
@@ -298,13 +298,13 @@ primaryBar = bar.Bar(
                     close_button_location="right",
                     text_closed="  ",
                     text_open="  ",
-                    fontsize=40,
+                    fontsize=30,
                     widgets=[
                         widget.LaunchBar(
                             background="#8af5f9",
                             foreground="#000",
                             text_only=True,
-                            fontsize=30,
+                            fontsize=25,
                             progs=[
                                 ("", "reboot", "Reboot"),
                                 ("", "shutdown now", "Shutdown"),

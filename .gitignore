@@ -8,8 +8,11 @@ gtk-2.0/
 gtk-3.0/
 lxqt/
 menus/
+nitrogen/
 pulse/
 qt5ct/
 qt6ct/
+qtile/__pycache__/
 QtProject.conf
-spotify
+spotify/
+user-dirs.*
