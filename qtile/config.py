@@ -298,13 +298,13 @@ primaryBar = bar.Bar(
                     close_button_location="right",
                     text_closed="  ",
                     text_open="  ",
-                    fontsize=30,
+                    fontsize=40,
                     widgets=[
                         widget.LaunchBar(
                             background="#8af5f9",
                             foreground="#000",
                             text_only=True,
-                            fontsize=25,
+                            fontsize=30,
                             progs=[
                                 ("", "reboot", "Reboot"),
                                 ("", "shutdown now", "Shutdown"),
