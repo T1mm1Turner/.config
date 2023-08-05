@@ -30,6 +30,7 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 ### Python imports ###
 from os import path
+# import re
 
 mod = "mod4"
 alt = "mod1"
@@ -56,7 +57,7 @@ keys = [
     ## Key([mod, "control"], "l", lazy.layout.grow_right(), desc="Grow window to the right"),
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
+    # Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -86,8 +87,8 @@ keys = [
     Key([mod], "z", lazy.window.toggle_minimize(), desc="Toggle minimization"),
     Key([mod], "f", lazy.window.toggle_floating(), desc="Toggle Windows floating"),
     Key([mod], "space", lazy.group.next_window(), desc="Move window focus to the next window"),
-    Key([mod, "shift"], "space", lazy.group.prev_window(), desc="Move window focus to the previous window"),
-    Key([mod], "m", lazy.spawn("/home/timmyt/.config/rofi/launchers/type-1/launcher.sh"), desc="Spawns rofi"),
+    # Key([mod, "shift"], "space", lazy.group.prev_window(), desc="Move window focus to the previous window"),
+    Key([mod], "m", lazy.spawn(path.join(path.expanduser("~"), ".config/rofi/launchers/type-1/launcher.sh")), desc="Spawns rofi"),
     ### Default (if not using adi1090x rofi themes
     ### Key([mod], "m", lazy.spawn("rofi -show combi"), desc="Spawns rofi"),
     # Key([mod], "m", lazy.run_extension(extension.DmenuRun(
@@ -106,8 +107,10 @@ keys = [
     Key([mod, "control"], "l", lazy.layout.grow_main(), desc="Grow the main window"),
     Key([mod, "control"], "k", lazy.layout.grow(), desc="Grow window"),
     Key([mod, "control"], "j", lazy.layout.shrink(), desc="Shrink window"),
-    Key([mod, alt], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
-    Key([mod], "e", lazy.spawn("doublecmd"), desc="File explorer spawner"),
+    Key([mod], "space", lazy.widget["keyboardlayout"].next_keyboard(), desc="Next keyboard layout."),
+    Key([mod, "shift"], "n", lazy.group.prev_window(), desc="Move window focus to the previous window"),
+    Key([mod], "n", lazy.group.next_window(), desc="Move window focus to the next window"),
+    # Key([mod], "e", lazy.spawn("doublecmd"), desc="File explorer spawner"),
 ]
 # Nerd fonts required for labels
 # Check https://www.nerdfonts.com/#home for more info
@@ -120,14 +123,16 @@ groups = [
         name="Media",
         label="󰐌",
         matches=[
-            Match(wm_class=["spotify", "Spotify"])
+            Match(wm_class=["spotify", "Spotify"]),
+            # Match(title=re.match(".", "YouTube - Google Chrome")),
         ]
     ),
     Group(
         name="Dev",
         label="",
         matches=[
-            Match(wm_class=["code", "Code"])
+            Match(wm_class=["code", "Code"]),
+            # Match(wm_class=["kitty", "kitty"]),
         ]
     ),
     Group(
@@ -193,15 +198,15 @@ layouts = [
 
 widget_defaults = dict(
     font="fredoka one",
-    fontsize=14,
+    fontsize=18,
     padding_x=5,
 )
 extension_defaults = widget_defaults.copy()
 
 primaryBar = bar.Bar(
-            size=35,
+            size=45,
             background="#240f36",
-            margin=[5, 5, 0, 5],
+            margin=[5, 15, 5, 15],
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
             widgets=[
@@ -226,29 +231,86 @@ primaryBar = bar.Bar(
                     this_current_screen_border="#00BCE1",
                     this_screen_border="#1E22AA",
                     other_current_screen_border="#00BCE1",
-                    other_screen_border="#1E22AA",
+                   other_screen_border="#1E22AA",
                     padding=0,
                     disable_drag=True,
                 ),
-                widget.Memory(
-                    background="#1b041a",
-                    foreground="#FB48C4",
+                widget.Spacer(
+                    length=10,
+                    background="#0f0c28"
                 ),
-                widget.TextBox(
-                    text="󰋊",
-                    fontsize=40,
-                    padding=5,
-                    background="#0f0c28",
-                    foreground="#5ffee9"
-                ),
-                widget.DF(
+                widget.WidgetBox(
+                    fontsize=30,
                     background="#0f0c28",
                     foreground="#5ffee9",
-                    visible_on_warn = False,
-                    warn_color = "#E0E722",
-                    warn_space = 50,
-                    padding=8,
-                    format='{p}  {r:.0f}%|{uf}{m}'
+                    text_closed="󱂷 ",
+                    text_open="󱂸 ",
+                    widgets=[
+                        widget.Spacer(
+                            length=10,
+                            background="#1b041a",
+                            foreground="#FB48C4",
+                        ),
+                        widget.TextBox(
+                            text=" ",
+                            fontsize=30,
+                            padding=0,
+                            background="#1b041a",
+                            foreground="#FB48C4",
+                        ),
+                        widget.Memory(
+                            background="#1b041a",
+                            foreground="#FB48C4",
+                        ),
+                        widget.Spacer(
+                            length=10,
+                            background="#1b041a",
+                            foreground="#FB48C4",
+                        ),
+                        widget.TextBox(
+                            text="󰋊 ",
+                            fontsize=30,
+                            padding=0,
+                            background="#1b041a",
+                            foreground="#FB48C4",
+                        ),
+                        widget.DF(
+                            background="#1b041a",
+                            foreground="#FB48C4",
+                            visible_on_warn = False,
+                            warn_color = "#E0E722",
+                            warn_space = 50,
+                            padding=8,
+                            format='{p} {r:.0f}%|{uf}{m}  '
+                        ),
+                        widget.TextBox(
+                            text=" ",
+                            fontsize=30,
+                            padding=0,
+                            background="#1b041a",
+                            foreground="#FB48C4",
+                        ),
+ 
+                        widget.Net(
+                            background="#1b041a",
+                            foreground="#FB48C4",
+                        ),
+                    ]
+                ),
+                widget.CheckUpdates(
+                    background="#131F42",
+                    colour_have_updates="#fe00fe",
+                    coloru_no_updates="#B5F5F5",
+                    initial_text="Starting...",
+                    display_format="󰮯 {updates}",
+                    distro="Arch_paru",
+                ),
+                widget.CheckUpdates(
+                    background="#131F42",
+                    colour_have_updates="#fe00fe",
+                    coloru_no_updates="#B5F5F5",
+                    display_format="󰣇 {updates}",
+                    distro="Arch"
                 ),
                 widget.WindowCount(
                     show_zero = False,
@@ -261,10 +323,14 @@ primaryBar = bar.Bar(
                     },
                 ),
                 ### Mid
-                widget.Spacer(),
+                # widget.Spacer(
+                #     length=bar.STRETCH
+                # ),
                 widget.Prompt(),
                 widget.WindowName(),
-                widget.Spacer(),
+                # widget.Spacer(
+                #     length=bar.STRETCH
+                # ),
                 ### Right
                 widget.Chord(
                     chords_colors={
@@ -276,17 +342,31 @@ primaryBar = bar.Bar(
                 # widget.TextBox("Press &lt;M-r&gt; to spawn", foreground="#d75f5f"),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
+                widget.KeyboardLayout(
+                    padding=0,
+                    configured_keyboards=["us", "es"]
+                ),
                 widget.Systray(
                     icon_size=22,
                     padding=15
                 ),
-                widget.KeyboardLayout(
-                    padding=10,
-                    configured_keyboards=["us", "es"]
+                widget.Spacer(
+                    length=10
                 ),
-                widget.Net(
-                    background="#1b041a",
-                    foreground="#FB48C4",
+                widget.Spacer(
+                    background="#0f0c28",
+                    length=10,
+                ),
+                widget.BatteryIcon(
+                    background="#0f0c28",
+                    margin_x=15,
+                    scale=1.1,
+                    theme_path=path.join(path.expanduser("~"), ".config/qtile/BatteryIcons"),
+                    update_interval=1
+                ),
+                widget.Spacer(
+                    background="#0f0c28",
+                    length=10,
                 ),
                 widget.Clock(
                     background="#000",

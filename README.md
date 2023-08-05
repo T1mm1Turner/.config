@@ -15,5 +15,6 @@ And a little more, there are some dependencies, like:
 ## Fonts ##
 [Nerd Fonts](https://www.nerdfonts.com/ "Nerd fonts") specifically "Hack nerd font" & "Symbols nerd font", these are used on the DE for symbols and more.
 [Hack fonts](https://sourcefoundry.org/hack/ "Hack fonts") for vscode, terminal and everything that need an "easy read".
+[Hack fonts](https://github.com/tonsky/FiraCode "Fira Code Fonts) for programming ligatures.
 
 There are some fonts that are not listed because they are no fundamental for my UI. Those are "user picks".
