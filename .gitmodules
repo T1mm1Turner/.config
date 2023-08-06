@@ -1,0 +1,4 @@
+[submodule "oh-my-zsh"]
+	path = oh-my-zsh
+	url = https://github.com/T1mm1Turner/ohmywzsh.git
+	branch = WrenchT
